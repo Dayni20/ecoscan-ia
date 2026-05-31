@@ -73,10 +73,23 @@ export const RegisterScreen = ({ navigation }: RegisterScreenProps) => {
       setLoading(true);
       await registerWithEmail(registerForm);
     } catch (error) {
-      const message =
-        error instanceof FirebaseError && error.code === "auth/email-already-in-use"
-          ? "Este email ya esta registrado"
-          : "Error al registrarse. Intenta mas tarde";
+      let message = "Error al registrarse. Intenta mas tarde";
+
+      if (error instanceof FirebaseError) {
+        if (error.code === "auth/email-already-in-use") {
+          message = "Este email ya esta registrado";
+        } else if (error.code === "auth/operation-not-allowed") {
+          message = "Debes habilitar Email/Password en Firebase Authentication";
+        } else if (error.code === "auth/network-request-failed") {
+          message = "Revisa tu conexion a internet";
+        } else if (error.code === "auth/invalid-email") {
+          message = "El correo electronico no es valido";
+        } else if (error.code === "auth/weak-password") {
+          message = "La contrasena es demasiado debil";
+        } else if (error.code === "auth/configuration-not-found") {
+          message = "Firebase Authentication no esta configurado en este proyecto";
+        }
+      }
 
       Alert.alert("Error", message);
     } finally {

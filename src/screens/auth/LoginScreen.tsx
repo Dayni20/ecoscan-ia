@@ -13,7 +13,7 @@ import { Button } from "../../components/ui/Button";
 import { Input } from "../../components/ui/Input";
 import { AuthStackParamList } from "../../navigation/typeNavigation";
 import { loginWithEmail } from "../../services/authService";
-import { loginStyles } from "../../styles/appStyle";
+import { loginStyles, registerStyles } from '../../styles/appStyle';
 import { LoginForm } from "../../types/auth";
 import { isValidEmail, isValidPassword } from "../../utils/validators";
 
@@ -82,6 +82,7 @@ export const LoginScreen = ({ navigation }: LoginScreenProps) => {
         keyboardShouldPersistTaps="handled"
       >
         <View style={loginStyles.header}>
+          <Text style={registerStyles.emoji}>♻️</Text>
           <Text style={loginStyles.title}>EcoScan IA</Text>
           <Text style={loginStyles.subtitle}>Inicia sesion para continuar</Text>
         </View>
