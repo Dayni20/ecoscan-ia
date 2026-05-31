@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
   Alert,
+  ImageBackground,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -11,9 +12,10 @@ import { FirebaseError } from "firebase/app";
 import { StackScreenProps } from "@react-navigation/stack";
 import { Button } from "../../components/ui/Button";
 import { Input } from "../../components/ui/Input";
+import { APP_BACKGROUND_IMAGE } from "../../constants/images";
 import { AuthStackParamList } from "../../navigation/typeNavigation";
 import { loginWithEmail } from "../../services/authService";
-import { loginStyles, registerStyles } from '../../styles/appStyle';
+import { loginStyles } from "../../styles/appStyle";
 import { LoginForm } from "../../types/auth";
 import { isValidEmail, isValidPassword } from "../../utils/validators";
 
@@ -73,59 +75,67 @@ export const LoginScreen = ({ navigation }: LoginScreenProps) => {
   };
 
   return (
-    <KeyboardAvoidingView
+    <ImageBackground
+      source={{ uri: APP_BACKGROUND_IMAGE }}
+      resizeMode="cover"
       style={{ flex: 1 }}
-      behavior={Platform.OS === "ios" ? "padding" : undefined}
     >
-      <ScrollView
-        contentContainerStyle={loginStyles.container}
-        keyboardShouldPersistTaps="handled"
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === "ios" ? "padding" : undefined}
       >
-        <View style={loginStyles.header}>
-          <Text style={registerStyles.emoji}>♻️</Text>
-          <Text style={loginStyles.title}>EcoScan IA</Text>
-          <Text style={loginStyles.subtitle}>Inicia sesion para continuar</Text>
-        </View>
+        <ScrollView
+          contentContainerStyle={loginStyles.container}
+          keyboardShouldPersistTaps="handled"
+        >
+          <View style={loginStyles.header}>
+            <Text style={loginStyles.emoji}>♻️</Text>
+            <Text style={loginStyles.title}>EcoScan IA</Text>
+            <Text style={loginStyles.subtitle}>
+              Escanea, aprende y cuida el planeta
+            </Text>
+          </View>
 
-        <View style={loginStyles.form}>
-          <Input
-            label="Correo electronico"
-            placeholder="nombre@correo.com"
-            value={loginForm.email}
-            onChangeText={(value) => handleInputChange("email", value)}
-            keyboardType="email-address"
-            autoCapitalize="none"
-            autoCorrect={false}
-            error={emailError}
-          />
+          <View style={loginStyles.form}>
+            <Input
+              label="Correo electronico"
+              placeholder="nombre@correo.com"
+              value={loginForm.email}
+              onChangeText={(value) => handleInputChange("email", value)}
+              keyboardType="email-address"
+              autoCapitalize="none"
+              autoCorrect={false}
+              error={emailError}
+            />
 
-          <Input
-            label="Contrasena"
-            placeholder="Minimo 6 caracteres"
-            value={loginForm.password}
-            onChangeText={(value) => handleInputChange("password", value)}
-            isPassword
-            error={passwordError}
-          />
+            <Input
+              label="Contrasena"
+              placeholder="Minimo 6 caracteres"
+              value={loginForm.password}
+              onChangeText={(value) => handleInputChange("password", value)}
+              isPassword
+              error={passwordError}
+            />
 
-          <Button
-            title="Iniciar sesion"
-            onPress={handleLogin}
-            loading={loading}
-            style={loginStyles.button}
-          />
-        </View>
+            <Button
+              title="Iniciar sesion"
+              onPress={handleLogin}
+              loading={loading}
+              style={loginStyles.button}
+            />
+          </View>
 
-        <View style={loginStyles.footer}>
-          <Text style={loginStyles.footerText}>No tienes cuenta? </Text>
-          <Text
-            style={loginStyles.link}
-            onPress={() => navigation.navigate("Register")}
-          >
-            Registrate
-          </Text>
-        </View>
-      </ScrollView>
-    </KeyboardAvoidingView>
+          <View style={loginStyles.footer}>
+            <Text style={loginStyles.footerText}>No tienes cuenta? </Text>
+            <Text
+              style={loginStyles.link}
+              onPress={() => navigation.navigate("Register")}
+            >
+              Registrate
+            </Text>
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </ImageBackground>
   );
 };

@@ -107,6 +107,7 @@ export const RegisterScreen = ({ navigation }: RegisterScreenProps) => {
         keyboardShouldPersistTaps="handled"
       >
         <View style={registerStyles.header}>
+           <Text style={registerStyles.emoji}>♻️</Text>
           <Text style={registerStyles.title}>Crear cuenta</Text>
           <Text style={registerStyles.subtitle}>Registrate para comenzar</Text>
         </View>
