@@ -31,6 +31,7 @@ export const HomeScreen = () => {
     >
       <ScrollView contentContainerStyle={homeStyles.container}>
         <TouchableOpacity style={homeStyles.logoutBtn} onPress={handleLogout}>
+          <Ionicons name="log-out-outline" size={20} color="#C94C4C" />
           <Text style={homeStyles.logoutText}>Salir</Text>
         </TouchableOpacity>
         <View style={homeStyles.logoCenter}>
@@ -40,14 +41,16 @@ export const HomeScreen = () => {
             Clasifica tus residuos con ayuda de inteligencia artificial
           </Text>
         </View>
+        <View style={homeStyles.heroCard}>
           <View style={homeStyles.heroText}>
-            <Text style={homeStyles.greeting}>Bienvenid@!</Text>
+            <Text style={homeStyles.actionTitle}>Hola!</Text>
             <Text style={homeStyles.email}>
               {user?.email ?? "Cuida el planeta escaneando tus residuos."}
             </Text>
           </View>
-          <Ionicons name="earth" size={78} color="#6FA66A" />
-        
+          <Ionicons name="earth" size={60} color="#6FA66A" />
+        </View>
+
         <View style={homeStyles.sectionHeader}>
           <Ionicons name="leaf" size={20} color="#2F6B2F" />
           <Text style={homeStyles.sectionTitle}>Que quieres hacer hoy?</Text>
@@ -57,7 +60,7 @@ export const HomeScreen = () => {
           style={[homeStyles.actionCard, homeStyles.primaryAction]}
         >
           <View style={homeStyles.actionIconPrimary}>
-            <Ionicons name="camera-outline" size={34} color="#FFFFFF" />
+            <Ionicons name="camera-outline" size={34} color="#236B2E" />
           </View>
           <View style={homeStyles.actionText}>
             <Text style={homeStyles.actionTitle}>Escanear residuo</Text>

@@ -67,7 +67,7 @@ export const registerStyles = StyleSheet.create({
 export const homeStyles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    backgroundColor: "rgba(226, 233, 214, 0.35)",
+    backgroundColor: "rgba(255, 255, 255, 0.35)",
     padding: 24,
     paddingTop: 72,
   },
@@ -85,11 +85,14 @@ export const homeStyles = StyleSheet.create({
   },
   heroCard: {
     minHeight: 124,
-    backgroundColor: "rgba(255, 255, 255, 0.9)",
+    backgroundColor: "rgba(223, 237, 215, 0.92)",
     borderRadius: 18,
     padding: 18,
     flexDirection: "row",
     alignItems: "center",
+borderWidth: 1,
+  borderColor: "rgba(111, 166, 106, 0.35)",
+
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.08,
@@ -110,16 +113,19 @@ export const homeStyles = StyleSheet.create({
   email: { fontSize: 13, color: "#3A4A3D", marginTop: 4, lineHeight: 19 },
   logoutBtn: {
     position: "absolute",
-    top: 28,
+    top: 45,
     right: 24,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
     backgroundColor: "#FFF5F5",
-    borderRadius: 10,
     paddingHorizontal: 14,
     paddingVertical: 8,
+    borderRadius: 14,
     borderWidth: 1,
-    borderColor: "#FED7D7",
+    borderColor: "#F2CACA",
   },
-  logoutText: { color: "#E53E3E", fontWeight: "700", fontSize: 14 },
+  logoutText: { color: "#C94C4C", fontSize: 14, fontWeight: "700" },
   sectionHeader: {
     flexDirection: "row",
     alignItems: "center",
@@ -136,7 +142,7 @@ export const homeStyles = StyleSheet.create({
     minHeight: 116,
     backgroundColor: "rgba(255, 255, 255, 0.92)",
     borderRadius: 18,
-    padding: 20,
+    padding: 18,
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 16,
@@ -147,13 +153,13 @@ export const homeStyles = StyleSheet.create({
     elevation: 4,
   },
   primaryAction: {
-    backgroundColor: "rgba(183, 225, 158, 0.92)",
+    backgroundColor: "rgba(255, 255, 255, 0.92)",
   },
   actionIconPrimary: {
     width: 66,
     height: 66,
     borderRadius: 33,
-    backgroundColor: "#236B2E",
+    backgroundColor: "#E8F6DD",
     alignItems: "center",
     justifyContent: "center",
     marginRight: 18,
@@ -171,7 +177,7 @@ export const homeStyles = StyleSheet.create({
   actionTitle: {
     fontSize: 20,
     fontWeight: "800",
-    color: "#236B2E",
+    color: "#1e6329",
     marginBottom: 4,
   },
   actionDescription: {
