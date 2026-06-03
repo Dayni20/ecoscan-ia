@@ -1,6 +1,8 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { HomeScreen } from "../screens/app/HomeScreen";
+import { CameraScreen } from "../screens/app/CameraScreen";
+import { ScanResultScreen } from "../screens/app/ScanResultScreen";
 import { AppStackParamList } from "./typeNavigation";
 
 const Stack = createStackNavigator<AppStackParamList>();
@@ -24,6 +26,16 @@ export const AppStack = () => {
       <Stack.Screen
         name="Home"
         component={HomeScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Camera"
+        component={CameraScreen}
+        options={{ title: "Escanear residuo" }}
+      />
+      <Stack.Screen
+        name="ScanResult"
+        component={ScanResultScreen}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

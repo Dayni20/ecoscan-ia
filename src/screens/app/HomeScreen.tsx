@@ -8,12 +8,16 @@ import {
   View,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { StackScreenProps } from "@react-navigation/stack";
 import { APP_BACKGROUND_IMAGE } from "../../constants/images";
 import { useAuth } from "../../hooks/useAuth";
+import { AppStackParamList } from "../../navigation/typeNavigation";
 import { logout } from "../../services/authService";
 import { homeStyles } from "../../styles/appStyle";
 
-export const HomeScreen = () => {
+type HomeScreenProps = StackScreenProps<AppStackParamList, "Home">;
+
+export const HomeScreen = ({ navigation }: HomeScreenProps) => {
   const { user } = useAuth();
 
   const handleLogout = () => {
@@ -34,13 +38,15 @@ export const HomeScreen = () => {
           <Ionicons name="log-out-outline" size={20} color="#C94C4C" />
           <Text style={homeStyles.logoutText}>Salir</Text>
         </TouchableOpacity>
+
         <View style={homeStyles.logoCenter}>
-          <Text style={homeStyles.emoji}>♻️</Text>
+          <Ionicons name="leaf" size={68} color="#6FA66A" />
           <Text style={homeStyles.greeting}>EcoScan IA</Text>
           <Text style={homeStyles.subtitle}>
             Clasifica tus residuos con ayuda de inteligencia artificial
           </Text>
         </View>
+
         <View style={homeStyles.heroCard}>
           <View style={homeStyles.heroText}>
             <Text style={homeStyles.actionTitle}>Hola!</Text>
@@ -58,6 +64,7 @@ export const HomeScreen = () => {
 
         <TouchableOpacity
           style={[homeStyles.actionCard, homeStyles.primaryAction]}
+          onPress={() => navigation.navigate("Camera")}
         >
           <View style={homeStyles.actionIconPrimary}>
             <Ionicons name="camera-outline" size={34} color="#236B2E" />
