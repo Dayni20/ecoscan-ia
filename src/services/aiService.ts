@@ -83,6 +83,12 @@ export const analyzeResidueImage = async (
     const errorText = await response.text();
     console.error("Gemini error:", response.status, errorText);
 
+    if (response.status === 429) {
+      throw new Error(
+        "Alcanzaste el limite gratuito de Gemini. Espera unos segundos e intenta nuevamente."
+      );
+    }
+
     throw new Error(
       `Gemini no pudo analizar la imagen (${response.status}). Revisa la consola.`
     );
@@ -97,3 +103,4 @@ export const analyzeResidueImage = async (
 
   return parseGeminiJson(text);
 };
+
