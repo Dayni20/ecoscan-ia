@@ -15,34 +15,26 @@ import { StackScreenProps } from "@react-navigation/stack";
 import { useFocusEffect } from "@react-navigation/native";
 import { APP_BACKGROUND_IMAGE } from "../../constants/images";
 import { useAuth } from "../../hooks/useAuth";
+import { useReport } from "../../hooks/useReport";
 import { AppStackParamList } from "../../navigation/typeNavigation";
-import { clearScanHistory, getScanHistory } from "../../services/historyService";
 import { historyStyles } from "../../styles/appStyle";
-import { ScanHistoryItem } from "../../types/scan";
 
 type HistoryScreenProps = StackScreenProps<AppStackParamList, "History">;
 
 export const HistoryScreen = ({ navigation }: HistoryScreenProps) => {
   const { user } = useAuth();
-  const [history, setHistory] = useState<ScanHistoryItem[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const { reports, loadingReports, loadReports, clearUserReports } = useReport();
   const [refreshing, setRefreshing] = useState<boolean>(false);
-
-  const loadHistory = async () => {
-    const items = await getScanHistory(user?.uid);
-    setHistory(items);
-  };
 
   useFocusEffect(
     useCallback(() => {
-      setLoading(true);
-      loadHistory().finally(() => setLoading(false));
-    }, [user?.uid])
+      loadReports(user?.uid);
+    }, [loadReports, user?.uid])
   );
 
   const handleRefresh = async () => {
     setRefreshing(true);
-    await loadHistory();
+    await loadReports(user?.uid);
     setRefreshing(false);
   };
 
@@ -66,8 +58,7 @@ export const HistoryScreen = ({ navigation }: HistoryScreenProps) => {
           text: "Eliminar",
           style: "destructive",
           onPress: async () => {
-            await clearScanHistory(user?.uid);
-            setHistory([]);
+            await clearUserReports(user?.uid);
           },
         },
       ]
@@ -101,12 +92,12 @@ export const HistoryScreen = ({ navigation }: HistoryScreenProps) => {
           </Text>
         </View>
 
-        {loading ? (
+        {loadingReports ? (
           <View style={historyStyles.emptyCard}>
             <ActivityIndicator color="#236B2E" size="large" />
             <Text style={historyStyles.emptyText}>Cargando historial...</Text>
           </View>
-        ) : history.length === 0 ? (
+        ) : reports.length === 0 ? (
           <View style={historyStyles.emptyCard}>
             <Ionicons name="leaf-outline" size={52} color="#6FA66A" />
             <Text style={historyStyles.emptyTitle}>Aun no hay escaneos</Text>
@@ -126,14 +117,14 @@ export const HistoryScreen = ({ navigation }: HistoryScreenProps) => {
           <>
             <View style={historyStyles.summaryRow}>
               <Text style={historyStyles.countText}>
-                {history.length} escaneo{history.length === 1 ? "" : "s"}
+                {reports.length} escaneo{reports.length === 1 ? "" : "s"}
               </Text>
               <TouchableOpacity onPress={handleClearHistory}>
                 <Text style={historyStyles.clearText}>Limpiar</Text>
               </TouchableOpacity>
             </View>
 
-            {history.map((item) => (
+            {reports.map((item) => (
               <TouchableOpacity
                 key={item.id}
                 style={historyStyles.historyCard}

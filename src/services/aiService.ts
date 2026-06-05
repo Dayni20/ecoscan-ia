@@ -89,6 +89,12 @@ export const analyzeResidueImage = async (
       );
     }
 
+    if (response.status === 503) {
+      throw new Error(
+        "Gemini esta con alta demanda en este momento. Espera un poco e intenta nuevamente."
+      );
+    }
+
     throw new Error(
       `Gemini no pudo analizar la imagen (${response.status}). Revisa la consola.`
     );

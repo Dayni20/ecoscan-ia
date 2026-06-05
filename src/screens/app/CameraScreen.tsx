@@ -11,10 +11,10 @@ import { CameraView, CameraType, useCameraPermissions } from "expo-camera";
 import { Ionicons } from "@expo/vector-icons";
 import { StackScreenProps } from "@react-navigation/stack";
 import { analyzeResidueImage } from "../../services/aiService";
-import { saveScanToHistory } from "../../services/historyService";
 import { cameraStyles } from "../../styles/appStyle";
 import { AppStackParamList } from "../../navigation/typeNavigation";
 import { useAuth } from "../../hooks/useAuth";
+import { useReport } from "../../hooks/useReport";
 
 interface CapturedPhoto {
   uri: string;
@@ -26,6 +26,7 @@ type CameraScreenProps = StackScreenProps<AppStackParamList, "Camera">;
 
 export const CameraScreen = ({ navigation }: CameraScreenProps) => {
   const { user } = useAuth();
+  const { addReport } = useReport();
   const cameraRef = useRef<CameraView | null>(null);
   const [permission, requestPermission] = useCameraPermissions();
   const [cameraType, setCameraType] = useState<CameraType>("back");
@@ -68,8 +69,7 @@ export const CameraScreen = ({ navigation }: CameraScreenProps) => {
       setAnalyzing(true);
       const result = await analyzeResidueImage(capturedPhoto.uri);
 
-      await saveScanToHistory({
-        userId: user?.uid,
+      await addReport(user?.uid, {
         photoUri: capturedPhoto.uri,
         result,
       });
