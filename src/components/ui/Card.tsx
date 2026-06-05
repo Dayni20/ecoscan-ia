@@ -8,7 +8,11 @@ interface CardProps {
   style?: ViewStyle;
 }
 
-export const Card = ({ children, onPress, style }: CardProps) => {
+export const Card = ({
+  children,
+  onPress,
+  style,
+}: CardProps): React.ReactElement => {
   const cardStyle = [cardStyles.card, style];
 
   if (onPress) {

@@ -21,7 +21,9 @@ import { isValidEmail, isValidPassword } from "../../utils/validators";
 
 type LoginScreenProps = StackScreenProps<AuthStackParamList, "Login">;
 
-export const LoginScreen = ({ navigation }: LoginScreenProps) => {
+export const LoginScreen = ({
+  navigation,
+}: LoginScreenProps): React.ReactElement => {
   const [loginForm, setLoginForm] = useState<LoginForm>({
     email: "",
     password: "",
@@ -30,7 +32,7 @@ export const LoginScreen = ({ navigation }: LoginScreenProps) => {
   const [passwordError, setPasswordError] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
-  const handleInputChange = (key: keyof LoginForm, value: string) => {
+  const handleInputChange = (key: keyof LoginForm, value: string): void => {
     setLoginForm((currentForm) => ({
       ...currentForm,
       [key]: value,
@@ -56,7 +58,7 @@ export const LoginScreen = ({ navigation }: LoginScreenProps) => {
     return isValid;
   };
 
-  const handleLogin = async () => {
+  const handleLogin = async (): Promise<void> => {
     if (!validateForm()) return;
 
     try {
@@ -101,7 +103,9 @@ export const LoginScreen = ({ navigation }: LoginScreenProps) => {
               label="Correo electronico"
               placeholder="nombre@correo.com"
               value={loginForm.email}
-              onChangeText={(value) => handleInputChange("email", value)}
+              onChangeText={(value: string): void =>
+                handleInputChange("email", value)
+              }
               keyboardType="email-address"
               autoCapitalize="none"
               autoCorrect={false}
@@ -112,7 +116,9 @@ export const LoginScreen = ({ navigation }: LoginScreenProps) => {
               label="Contrasena"
               placeholder="Minimo 6 caracteres"
               value={loginForm.password}
-              onChangeText={(value) => handleInputChange("password", value)}
+              onChangeText={(value: string): void =>
+                handleInputChange("password", value)
+              }
               isPassword
               error={passwordError}
             />

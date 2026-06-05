@@ -6,7 +6,7 @@ import { AuthStackParamList } from "./typeNavigation";
 
 const Stack = createStackNavigator<AuthStackParamList>();
 
-export const AuthStack = () => {
+export const AuthStack = (): React.ReactElement => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Login" component={LoginScreen} />

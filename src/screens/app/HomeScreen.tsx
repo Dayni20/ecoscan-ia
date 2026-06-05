@@ -17,10 +17,12 @@ import { homeStyles } from "../../styles/appStyle";
 
 type HomeScreenProps = StackScreenProps<AppStackParamList, "Home">;
 
-export const HomeScreen = ({ navigation }: HomeScreenProps) => {
+export const HomeScreen = ({
+  navigation,
+}: HomeScreenProps): React.ReactElement => {
   const { user } = useAuth();
 
-  const handleLogout = () => {
+  const handleLogout = (): void => {
     Alert.alert("Cerrar sesion", "Quieres salir de tu cuenta?", [
       { text: "Cancelar", style: "cancel" },
       { text: "Salir", style: "destructive", onPress: () => logout() },

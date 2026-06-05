@@ -20,7 +20,7 @@ export const Input = ({
   error,
   isPassword = false,
   ...props
-}: InputProps) => {
+}: InputProps): React.ReactElement => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   return (
@@ -36,7 +36,7 @@ export const Input = ({
         {isPassword && (
           <TouchableOpacity
             style={inputStyles.eyeIcon}
-            onPress={() => setShowPassword(!showPassword)}
+            onPress={(): void => setShowPassword(!showPassword)}
           >
             <Ionicons
               name={showPassword ? 'eye-off' : 'eye'}

@@ -6,7 +6,9 @@ interface LoadingSpinnerProps {
   message?: string;
 }
 
-export const LoadingSpinner = ({ message = 'Cargando...' }: LoadingSpinnerProps) => {
+export const LoadingSpinner = ({
+  message = 'Cargando...',
+}: LoadingSpinnerProps): React.ReactElement => {
   return (
     <View style={loadingStyles.container}>
       <ActivityIndicator size="large" color="#4F46E5" />

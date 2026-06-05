@@ -8,7 +8,7 @@ import { AppStackParamList } from "./typeNavigation";
 
 const Stack = createStackNavigator<AppStackParamList>();
 
-export const AppStack = () => {
+export const AppStack = (): React.ReactElement => {
   return (
     <Stack.Navigator
       screenOptions={{

@@ -24,7 +24,9 @@ interface CapturedPhoto {
 
 type CameraScreenProps = StackScreenProps<AppStackParamList, "Camera">;
 
-export const CameraScreen = ({ navigation }: CameraScreenProps) => {
+export const CameraScreen = ({
+  navigation,
+}: CameraScreenProps): React.ReactElement => {
   const { user } = useAuth();
   const { addReport } = useReport();
   const cameraRef = useRef<CameraView | null>(null);
@@ -34,13 +36,13 @@ export const CameraScreen = ({ navigation }: CameraScreenProps) => {
   const [takingPhoto, setTakingPhoto] = useState<boolean>(false);
   const [analyzing, setAnalyzing] = useState<boolean>(false);
 
-  const toggleCameraType = () => {
+  const toggleCameraType = (): void => {
     setCameraType((currentType) =>
       currentType === "back" ? "front" : "back"
     );
   };
 
-  const takePhoto = async () => {
+  const takePhoto = async (): Promise<void> => {
     if (!cameraRef.current || takingPhoto) return;
 
     try {
@@ -62,7 +64,7 @@ export const CameraScreen = ({ navigation }: CameraScreenProps) => {
     }
   };
 
-  const analyzePhoto = async () => {
+  const analyzePhoto = async (): Promise<void> => {
     if (!capturedPhoto || analyzing) return;
 
     try {

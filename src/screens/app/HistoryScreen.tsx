@@ -21,24 +21,26 @@ import { historyStyles } from "../../styles/appStyle";
 
 type HistoryScreenProps = StackScreenProps<AppStackParamList, "History">;
 
-export const HistoryScreen = ({ navigation }: HistoryScreenProps) => {
+export const HistoryScreen = ({
+  navigation,
+}: HistoryScreenProps): React.ReactElement => {
   const { user } = useAuth();
   const { reports, loadingReports, loadReports, clearUserReports } = useReport();
   const [refreshing, setRefreshing] = useState<boolean>(false);
 
   useFocusEffect(
-    useCallback(() => {
+    useCallback((): void => {
       loadReports(user?.uid);
     }, [loadReports, user?.uid])
   );
 
-  const handleRefresh = async () => {
+  const handleRefresh = async (): Promise<void> => {
     setRefreshing(true);
     await loadReports(user?.uid);
     setRefreshing(false);
   };
 
-  const formatDate = (date: string) => {
+  const formatDate = (date: string): string => {
     return new Date(date).toLocaleDateString("es-EC", {
       day: "2-digit",
       month: "short",
@@ -48,7 +50,7 @@ export const HistoryScreen = ({ navigation }: HistoryScreenProps) => {
     });
   };
 
-  const handleClearHistory = () => {
+  const handleClearHistory = (): void => {
     Alert.alert(
       "Limpiar historial",
       "Quieres eliminar todos los residuos escaneados?",
@@ -57,7 +59,7 @@ export const HistoryScreen = ({ navigation }: HistoryScreenProps) => {
         {
           text: "Eliminar",
           style: "destructive",
-          onPress: async () => {
+          onPress: async (): Promise<void> => {
             await clearUserReports(user?.uid);
           },
         },

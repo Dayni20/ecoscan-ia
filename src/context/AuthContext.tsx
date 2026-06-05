@@ -2,7 +2,7 @@ import React, { createContext, useEffect, useState, ReactNode } from 'react';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { auth } from '../config/firebase';
 
-interface AuthContextType {
+export interface AuthContextType {
   user: User | null;
   loading: boolean;
 }
@@ -16,7 +16,9 @@ interface AuthProviderProps {
   children: ReactNode;
 }
 
-export const AuthProvider = ({ children }: AuthProviderProps) => {
+export const AuthProvider = ({
+  children,
+}: AuthProviderProps): React.ReactElement => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 

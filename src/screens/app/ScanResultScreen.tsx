@@ -12,16 +12,17 @@ import { StackScreenProps } from "@react-navigation/stack";
 import { APP_BACKGROUND_IMAGE } from "../../constants/images";
 import { AppStackParamList } from "../../navigation/typeNavigation";
 import { scanResultStyles } from "../../styles/appStyle";
+import { DetectedResidue } from "../../types/scan";
 
 type ScanResultScreenProps = StackScreenProps<AppStackParamList, "ScanResult">;
 
 export const ScanResultScreen = ({
   navigation,
   route,
-}: ScanResultScreenProps) => {
+}: ScanResultScreenProps): React.ReactElement => {
   const { photoUri, result } = route.params;
-  const normalizeName = (name: string) => name.trim().toLowerCase();
-  const otherItems = (result.detectedItems ?? []).filter(
+  const normalizeName = (name: string): string => name.trim().toLowerCase();
+  const otherItems: DetectedResidue[] = (result.detectedItems ?? []).filter(
     (item) => normalizeName(item.residueName) !== normalizeName(result.residueName)
   );
 

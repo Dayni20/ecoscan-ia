@@ -26,8 +26,8 @@ export const Button = ({
   variant = 'primary',
   style,
   textStyle,
-}: ButtonProps) => {
-  const getBackgroundColor = () => {
+}: ButtonProps): React.ReactElement => {
+  const getBackgroundColor = (): string => {
     if (disabled || loading) return '#A0AEC0';
     switch (variant) {
       case 'secondary':
@@ -39,7 +39,7 @@ export const Button = ({
     }
   };
 
-  const getTextColor = () => {
+  const getTextColor = (): string => {
     if (variant === 'secondary') return '#4A5568';
     return '#FFFFFF';
   };

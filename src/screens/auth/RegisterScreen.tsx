@@ -23,7 +23,9 @@ import {
 
 type RegisterScreenProps = StackScreenProps<AuthStackParamList, "Register">;
 
-export const RegisterScreen = ({ navigation }: RegisterScreenProps) => {
+export const RegisterScreen = ({
+  navigation,
+}: RegisterScreenProps): React.ReactElement => {
   const [registerForm, setRegisterForm] = useState<RegisterForm>({
     email: "",
     password: "",
@@ -34,7 +36,7 @@ export const RegisterScreen = ({ navigation }: RegisterScreenProps) => {
   const [confirmError, setConfirmError] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
-  const handleInputChange = (key: keyof RegisterForm, value: string) => {
+  const handleInputChange = (key: keyof RegisterForm, value: string): void => {
     setRegisterForm((currentForm) => ({
       ...currentForm,
       [key]: value,
@@ -66,7 +68,7 @@ export const RegisterScreen = ({ navigation }: RegisterScreenProps) => {
     return isValid;
   };
 
-  const handleRegister = async () => {
+  const handleRegister = async (): Promise<void> => {
     if (!validateForm()) return;
 
     try {
@@ -117,7 +119,9 @@ export const RegisterScreen = ({ navigation }: RegisterScreenProps) => {
             label="Correo electronico"
             placeholder="nombre@correo.com"
             value={registerForm.email}
-            onChangeText={(value) => handleInputChange("email", value)}
+            onChangeText={(value: string): void =>
+              handleInputChange("email", value)
+            }
             keyboardType="email-address"
             autoCapitalize="none"
             autoCorrect={false}
@@ -128,7 +132,9 @@ export const RegisterScreen = ({ navigation }: RegisterScreenProps) => {
             label="Contrasena"
             placeholder="Minimo 6 caracteres"
             value={registerForm.password}
-            onChangeText={(value) => handleInputChange("password", value)}
+            onChangeText={(value: string): void =>
+              handleInputChange("password", value)
+            }
             isPassword
             error={passwordError}
           />
@@ -137,7 +143,9 @@ export const RegisterScreen = ({ navigation }: RegisterScreenProps) => {
             label="Confirmar contrasena"
             placeholder="Repite tu contrasena"
             value={registerForm.confirmPassword}
-            onChangeText={(value) => handleInputChange("confirmPassword", value)}
+            onChangeText={(value: string): void =>
+              handleInputChange("confirmPassword", value)
+            }
             isPassword
             error={confirmError}
           />
