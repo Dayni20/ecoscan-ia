@@ -78,7 +78,10 @@ export const HomeScreen = ({ navigation }: HomeScreenProps) => {
           <Ionicons name="chevron-forward" size={30} color="#236B2E" />
         </TouchableOpacity>
 
-        <TouchableOpacity style={homeStyles.actionCard}>
+        <TouchableOpacity
+          style={homeStyles.actionCard}
+          onPress={() => navigation.navigate("History")}
+        >
           <View style={homeStyles.actionIconSecondary}>
             <Ionicons name="clipboard-outline" size={34} color="#236B2E" />
           </View>

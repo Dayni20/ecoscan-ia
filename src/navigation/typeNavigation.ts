@@ -8,6 +8,7 @@ export type AuthStackParamList = {
 export type AppStackParamList = {
   Home: undefined;
   Camera: undefined;
+  History: undefined;
   ScanResult: {
     photoUri: string;
     result: ScanResult;

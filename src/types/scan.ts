@@ -17,3 +17,10 @@ export interface ScanResult {
   environmentalImpact: string;
   detectedItems?: DetectedResidue[];
 }
+
+export interface ScanHistoryItem {
+  id: string;
+  photoUri: string;
+  result: ScanResult;
+  scannedAt: string;
+}
